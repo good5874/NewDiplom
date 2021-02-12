@@ -12,7 +12,7 @@ namespace Diplom.Services
         {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("Администрация сайта", "qweqw.qwe.88@mail.ru"));
+            emailMessage.From.Add(new MailboxAddress("Администрация сайта", "kzito_dip@mail.ru"));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -24,7 +24,7 @@ namespace Diplom.Services
             {
                 await client.ConnectAsync("smtp.mail.ru", 465, true);
 
-                await client.AuthenticateAsync("эмайл@mail.ru", "пароль");
+                await client.AuthenticateAsync("kzito_dip@mail.ru", "315820qwerty315820");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
