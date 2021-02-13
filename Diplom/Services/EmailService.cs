@@ -24,7 +24,7 @@ namespace Diplom.Services
             {
                 await client.ConnectAsync("smtp.mail.ru", 465, true);
 
-                await client.AuthenticateAsync("kzito_dip@mail.ru", "315820qwerty315820");
+                await client.AuthenticateAsync("kzito_dip@mail.ru", "Gabenlord315820.");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
