@@ -38,5 +38,6 @@ namespace Diplom.Data
             //    .WithMany(c => c.TaskDistributions)
             //    .OnDelete(DeleteBehavior.ClientNoAction);
         }
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
     }
 }
