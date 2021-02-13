@@ -31,7 +31,6 @@ namespace Diplom.Models
         [EmailAddress(ErrorMessage = "Некоректный введенный адрес")]
         public string Email { get; set; }
         public int RightsId { get; set; }
-        public Right Rights { get; set; }
 
         public int PluralityId { get; set; }
         public Plurality Plurality { get; set; }
