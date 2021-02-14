@@ -1,4 +1,4 @@
-﻿@model List<Diplom.Models.ApplicationRole>
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,7 +22,7 @@
             {
                 <tr>
                     <td class="colortext">
-                        @Html.DisplayFor(modelItem => item.NameSecond)
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Изменить</a> |

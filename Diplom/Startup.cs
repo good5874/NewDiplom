@@ -32,8 +32,7 @@ namespace Diplom
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser,ApplicationRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoleManager<RoleManager<ApplicationRole>>()
+            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

@@ -16,9 +16,9 @@ namespace Diplom.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RoleManagmentController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public RoleManagmentController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -29,7 +29,7 @@ namespace Diplom.Controllers
         public async Task<IActionResult> Index()
         {
             List<RoleManagmentViewModel> UserRoleList = new List<RoleManagmentViewModel>();
-            foreach (ApplicationRole role in _roleManager.Roles)
+            foreach (IdentityRole role in _roleManager.Roles)
             {
                 var users = await _userManager.GetUsersInRoleAsync(role.Name);
 

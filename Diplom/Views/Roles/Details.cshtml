@@ -1,4 +1,4 @@
-﻿@model Diplom.Models.ApplicationRole
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
 
 @{ ViewData["Title"] = "Details"; }
 
@@ -12,7 +12,7 @@
                 Название роли
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.NameSecond)
+                @Html.DisplayFor(model => model.Name)
             </dd>
         </dl>
     </div>

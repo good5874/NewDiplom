@@ -14,9 +14,9 @@ namespace Diplom.Controllers
     public class RolesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RolesController(ApplicationDbContext context, RoleManager<ApplicationRole> roleManager)
+        public RolesController(ApplicationDbContext context, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _roleManager = roleManager;
@@ -57,16 +57,15 @@ namespace Diplom.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string NameSecond)
+        public async Task<IActionResult> Create(string Name)
         {
 
             if (ModelState.IsValid)
             {
-                var c = new ApplicationRole(NameSecond);
-                await _roleManager.CreateAsync(c);
+                await _roleManager.CreateAsync(new IdentityRole(Name));
                 return RedirectToAction(nameof(Index));
             }
-            return View(NameSecond);
+            return View(Name);
         }
 
         // GET: Roles/Edit/5
@@ -90,7 +89,7 @@ namespace Diplom.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id,  string NameSecond)
+        public async Task<IActionResult> Edit(string id,  string Name)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -103,9 +102,7 @@ namespace Diplom.Controllers
             {
                 try
                 {
-                    role.NameSecond = NameSecond;
-                    role.Name = NameSecond;
-                    role.NormalizedName = NameSecond.ToUpper();
+                    role.Name = Name;
                     await _roleManager.UpdateAsync(role);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -132,7 +129,7 @@ namespace Diplom.Controllers
                 return NotFound();
             }
 
-            var role = await _context.ApplicationRoles
+            var role = await _context.Roles
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (role == null)
             {
@@ -147,15 +144,15 @@ namespace Diplom.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var role = await _context.ApplicationRoles.FindAsync(id);
-            _context.ApplicationRoles.Remove(role);
+            var role = await _context.Roles.FindAsync(id);
+            _context.Roles.Remove(role);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RoleExists(string id)
         {
-            return _context.ApplicationRoles.Any(e => e.Id == id);
+            return _context.Roles.Any(e => e.Id == id);
         }
     }
 }
