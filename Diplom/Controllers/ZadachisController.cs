@@ -18,8 +18,9 @@ using Diplom.Models.ZadachisTreeView;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Diplom.Data;
+using Microsoft.AspNetCore.Identity;
 
-namespace NewDiplom.Controllers
+namespace Diplom.Controllers
 {
     public class ZadachisController : Controller
     {
