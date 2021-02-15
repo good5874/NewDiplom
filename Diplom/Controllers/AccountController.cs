@@ -9,9 +9,12 @@ using Diplom.Models;
 using Diplom.Data;
 using Microsoft.AspNetCore.Identity;
 using Diplom.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Diplom.Controllers
 {
+    [Authorize] // просто авторизация, любой авторизированный юзер
+    //[Authorize(Roles = "admin, user")] // авторизация по ролям, юзер с такими ролями, роли надо добавить
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _context;
