@@ -15,10 +15,10 @@ namespace Diplom.Controllers
     public class RoleManagmentController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RoleManagmentController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public RoleManagmentController(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -33,7 +33,7 @@ namespace Diplom.Controllers
             {
                 var users = await _userManager.GetUsersInRoleAsync(role.Name);
 
-                foreach (IdentityUser identityUser in users)
+                foreach (User identityUser in users)
                 {
                     UserRoleList.Add(new RoleManagmentViewModel()
                     {
