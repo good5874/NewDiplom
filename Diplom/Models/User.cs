@@ -18,6 +18,8 @@ namespace Diplom.Models
         {
 
         }
+        public int? PluralityId { get; set; }
+
         public Plurality Plurality { get; set; }
     }
 }

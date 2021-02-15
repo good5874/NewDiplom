@@ -100,7 +100,7 @@ namespace Diplom.Controllers
                 await _userManager.SetEmailAsync(user, model.Email);
                 await _userManager.SetPhoneNumberAsync(user, model.Phone);
                 await _userManager.AddPasswordAsync(user, model.Password);
-                user.Plurality.Id = model.PluralityId;
+                user.PluralityId = model.PluralityId;
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
@@ -136,7 +136,7 @@ namespace Diplom.Controllers
                 Email = user.Email,
                 UserName = user.UserName,
                 Phone = user.PhoneNumber,
-                PluralityId = user.Plurality.Id
+                PluralityId = user.PluralityId
             };
 
             _context.Employees.Load();
@@ -163,7 +163,7 @@ namespace Diplom.Controllers
                     await _userManager.SetUserNameAsync(user, model.UserName);
                     await _userManager.SetPhoneNumberAsync(user, model.Phone);
                     await _userManager.AddPasswordAsync(user, model.Password);
-                    user.Plurality.Id = model.PluralityId;
+                    user.PluralityId = model.PluralityId;
 
                     await _userManager.UpdateAsync(user);
 

@@ -34,7 +34,7 @@ namespace Diplom.ViewModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public int PluralityId { get; set; }
+        public int? PluralityId { get; set; }
 
         public string PluralityView { get; set; }
     }
