@@ -1,43 +1,39 @@
-﻿@model Diplom.ViewModels.AccountViewModel
+﻿@model Diplom.Models.FileTask
 
-@{ ViewData["Title"] = "Delete"; }
+@{
+    ViewData["Title"] = "Delete";
+}
 
 <h1 class="text-center colortext">Удаление</h1>
-<h4 class="text-center colortext">Аккаунт</h4>
+<h4 class="text-center colortext">Файл к задаче</h4>
 <body class="body">
     <div>
         <hr />
         <dl class="dl-horizontal">
             <dt class="colortext">
-                Логин
+                Путь к файлу
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.UserName)
+                @Html.DisplayFor(model => model.Path_File)
             </dd>
             <dt class="colortext">
-                Email
+                Описание файла
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.Email)
+                @Html.DisplayFor(model => model.File_Detail)
             </dd>
             <dt class="colortext">
-                Телефон
+                Задача
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.Phone)
-            </dd>
-            <dt class="colortext">
-                Совместительство
-            </dt>
-            <dd class="colortext">
-                @Html.DisplayFor(model => model.PluralityView)
+                @Html.DisplayFor(model => model.TaskDistribution.View)
             </dd>
         </dl>
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
             <input type="submit" value="Удалить" class="btn br0 btn-secondary" , onclick="return confirm ('Удалить запись?')" /> |
-            <a asp-action="Index" class="colortext">Обратно к аккаунтам</a>
+            <a asp-action="Index" class="colortext">Обратно к файлам</a>
         </form>
     </div>
 </body>

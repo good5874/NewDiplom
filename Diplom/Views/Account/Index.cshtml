@@ -23,6 +23,9 @@
                 <th class="colortext">
                     Номер телефона
                 </th>
+                <th class="colortext">
+                    Совместительство
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -41,6 +44,9 @@
     </td>
     <td class="colortext">
         @Html.DisplayFor(modelItem => item.Phone)
+    </td>
+    <td class="colortext">
+        @Html.DisplayFor(modelItem => item.PluralityView)
     </td>
     <td>
         <a asp-action="Edit" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Изменить</a> |

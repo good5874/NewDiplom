@@ -1,43 +1,45 @@
-﻿@model Diplom.ViewModels.AccountViewModel
+﻿@model Diplom.Models.Employee
 
-@{ ViewData["Title"] = "Delete"; }
+@{
+    ViewData["Title"] = "Delete";
+}
 
 <h1 class="text-center colortext">Удаление</h1>
-<h4 class="text-center colortext">Аккаунт</h4>
 <body class="body">
     <div>
+        <h4 class="text-center colortext">Сотрудники</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt class="colortext">
-                Логин
+                Фамилия
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.UserName)
+                @Html.DisplayFor(model => model.Surname)
             </dd>
             <dt class="colortext">
-                Email
+                Имя
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.Email)
+                @Html.DisplayFor(model => model.Name)
             </dd>
             <dt class="colortext">
-                Телефон
+                Отчество
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.Phone)
+                @Html.DisplayFor(model => model.Second_Name)
             </dd>
             <dt class="colortext">
-                Совместительство
+                Номер сотрудника
             </dt>
             <dd class="colortext">
-                @Html.DisplayFor(model => model.PluralityView)
+                @Html.DisplayFor(model => model.Employee_Number)
             </dd>
         </dl>
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
             <input type="submit" value="Удалить" class="btn br0 btn-secondary" , onclick="return confirm ('Удалить запись?')" /> |
-            <a asp-action="Index" class="colortext">Обратно к аккаунтам</a>
+            <a asp-action="Index" class="colortext">Обратно к сотрудникам</a>
         </form>
     </div>
 </body>
