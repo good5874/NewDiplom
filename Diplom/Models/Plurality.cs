@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace Diplom.Models
 {
@@ -22,12 +23,12 @@ namespace Diplom.Models
                     Position == null ? String.Empty : Position.Position_name,
                     Employee == null ? String.Empty : Employee.View);
 
-        public ICollection<Account> Accounts { get; set; }
+        public ICollection<User> users { get; set; }
         public ICollection<TaskDistribution> TaskDistributions { get; set; }
         public Plurality()
         {
             TaskDistributions = new List<TaskDistribution>();
-            Accounts = new List<Account>();
+            users = new List<User>();
         }
     }
 }

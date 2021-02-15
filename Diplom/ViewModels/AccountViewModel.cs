@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Diplom.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Diplom.ViewModels
 {
@@ -32,5 +33,9 @@ namespace Diplom.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public int PluralityId { get; set; }
+
+        public string PluralityView { get; set; }
     }
 }
