@@ -36,11 +36,19 @@ namespace Diplom.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 if (await _userManager.IsInRoleAsync(user, "админ"))
                 {
-                    var _tasks = _context.TaskDistributions.ToList();
+                    var _tasks = _context.TaskDistributions
+                        .Include(e => e.Plurality)
+                        .Include(e => e.Plurality.Employee)
+                        .Include(e => e.Plurality.Position)
+                        .ToList();
                     return View(_tasks);
                 }
 
-                var tasks = _context.TaskDistributions.Where(e => e.PluralityId == user.PluralityId).ToList();
+                var tasks = _context.TaskDistributions
+                        .Include(e => e.Plurality)
+                        .Include(e => e.Plurality.Employee)
+                        .Include(e => e.Plurality.Position)
+                        .Where(e => e.PluralityId == user.PluralityId).ToList();
 
                 return View(tasks);
             }
