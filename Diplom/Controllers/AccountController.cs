@@ -10,6 +10,10 @@ using Diplom.Data;
 using Microsoft.AspNetCore.Identity;
 using Diplom.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace Diplom.Controllers
 {
@@ -18,6 +22,8 @@ namespace Diplom.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IEmailSender _emailSender;
+
 
         public AccountController(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -105,7 +111,16 @@ namespace Diplom.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Page(
+                    "/Account/ConfirmEmail",
+                    pageHandler: null,
+                    values: new { area = "Identity", userId = user.Id, code = code},
+                    protocol: Request.Scheme);
 
+                await _emailSender.SendEmailAsync(user.Email, "Confirm your email",
+                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                 return RedirectToAction(nameof(Index));
             }
             _context.Employees.Load();
