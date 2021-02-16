@@ -8,26 +8,43 @@ using Microsoft.EntityFrameworkCore;
 using Diplom.Models;
 using Diplom.Enums;
 using Diplom.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Diplom.Controllers
 {
+    [Authorize]
     public class TaskDistributionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public TaskDistributionsController(ApplicationDbContext context)
+
+        public TaskDistributionsController(ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: TaskDistributions
         public async Task<IActionResult> Index()
         {
-            _context.Zadachis.Load();
-            _context.Employees.Load();
-            _context.Positions.Load();
-            var diplomContext = _context.TaskDistributions.Include(t => t.Plurality).Include(t => t.Status).Include(t => t.Zadachi);
-            return View(await diplomContext.ToListAsync());
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (await _userManager.IsInRoleAsync(user, "админ"))
+                {
+                    var _tasks = _context.TaskDistributions.ToList();
+                    return View(_tasks);
+                }
+
+                var tasks = _context.TaskDistributions.Where(e => e.PluralityId == user.PluralityId).ToList();
+
+                return View(tasks);
+            }
+            return View();
         }
 
         // GET: TaskDistributions/Details/5
@@ -37,6 +54,10 @@ namespace Diplom.Controllers
             {
                 return NotFound();
             }
+            var users = _userManager.Users.Include(e => e.Plurality.TaskDistributions)
+                .Include(e => e.Plurality.Position)
+                .Include(e => e.Plurality.Employee)
+                .FirstOrDefaultAsync(e => e.Plurality != null);
 
             var taskDistribution = await _context.TaskDistributions
                 .Include(t => t.Plurality)
