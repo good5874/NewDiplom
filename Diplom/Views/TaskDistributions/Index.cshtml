@@ -46,31 +46,60 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class="colortext">
-                        @Html.DisplayFor(modelItem => item.StartedAt)
+            <tr>
+                <td class="colortext">
+                    @Html.DisplayFor(modelItem => item.StartedAt)
+                </td>
+                <td class="colortext">
+                    @Html.DisplayFor(modelItem => item.PeriodValue)
+                </td>
+                <td class="colortext">
+                    @Html.DisplayFor(modelItem => item.PeriodUnit)
+                </td>
+                <td class="colortext">
+                    @Html.DisplayFor(modelItem => item.Plurality.View)
+                </td>
+                <td class="colortext">
+                    @Html.DisplayFor(modelItem => item.Zadachi.View)
+                </td>
+
+                @if (item.Status.Status_name == "В работе")
+                {
+                    <td class="colortext" style="color:#ff0000" >
+                        @Html.DisplayFor(modelItem => item.Status.Status_name)
                     </td>
-                    <td class="colortext">
-                        @Html.DisplayFor(modelItem => item.PeriodValue)
+                }
+                else if (item.Status.Status_name == "На проверке")
+                {
+                    <td class="colortext" style="color:#ff0000" >
+                        @Html.DisplayFor(modelItem => item.Status.Status_name)
                     </td>
-                    <td class="colortext">
-                        @Html.DisplayFor(modelItem => item.PeriodUnit)
+                }
+                else if (item.Status.Status_name == "Завершен")
+                {
+                    <td class="colortext" style="color:#ff0000" >
+                        @Html.DisplayFor(modelItem => item.Status.Status_name)
                     </td>
-                    <td class="colortext">
-                        @Html.DisplayFor(modelItem => item.Plurality.View)
+                }
+                else if (item.Status.Status_name == "На распределении")
+                {
+                    <td class="colortext" style="color:#ff0000" >
+                        @Html.DisplayFor(modelItem => item.Status.Status_name)
                     </td>
-                    <td class="colortext">
-                        @Html.DisplayFor(modelItem => item.Zadachi.View)
-                    </td>
+                }
+                else
+                {
                     <td class="colortext">
                         @Html.DisplayFor(modelItem => item.Status.Status_name)
                     </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Изменить</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Подробнее</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Удалить</a>
-                    </td>
-                </tr>
+                }
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Изменить</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Подробнее</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" , class="btn br0 btn-secondary">Удалить</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
