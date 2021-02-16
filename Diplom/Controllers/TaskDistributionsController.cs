@@ -40,6 +40,8 @@ namespace Diplom.Controllers
                         .Include(e => e.Plurality)
                         .Include(e => e.Plurality.Employee)
                         .Include(e => e.Plurality.Position)
+                        .Include(e => e.Zadachi)
+                        .Include(e => e.Status)
                         .ToList();
                     return View(_tasks);
                 }
@@ -48,6 +50,8 @@ namespace Diplom.Controllers
                         .Include(e => e.Plurality)
                         .Include(e => e.Plurality.Employee)
                         .Include(e => e.Plurality.Position)
+                        .Include(e => e.Zadachi)
+                        .Include(e => e.Status)
                         .Where(e => e.PluralityId == user.PluralityId).ToList();
 
                 return View(tasks);
