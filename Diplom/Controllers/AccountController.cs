@@ -25,11 +25,13 @@ namespace Diplom.Controllers
         private readonly IEmailSender _emailSender;
 
 
-        public AccountController(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager,
+            IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _emailSender = emailSender;
         }
 
         // GET: Accounts
